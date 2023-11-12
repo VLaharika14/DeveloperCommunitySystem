@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 @Entity
@@ -27,7 +28,11 @@ public class Comment {
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userid", referencedColumnName = "userId")
 	private Developer createdBy;
-
+//	@ManyToOne
+//	@JoinColumn(name="post_Id")
+//	private Post post;
+//	@OneToMany(mappedBy="comment_Id",cascade=CascadeType.ALL)
+//private Comment comment;
 	private LocalDate createdDate;
 	
 	@OneToMany(mappedBy = "comment")

@@ -8,11 +8,16 @@ import javax.persistence.EntityNotFoundException;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.dcs.dao.CommentDao;
 import com.dcs.dto.CommentDTO;
 import com.dcs.entity.Comment;
+
+//import net.bytebuddy.asm.Advice.OffsetMapping.Sort;
  
 @Service
 public class CommentServiceImpl implements ICommentService {
@@ -97,16 +102,45 @@ public class CommentServiceImpl implements ICommentService {
 	}
 
 	@Override
-	public List<CommentDTO> getCommentsByPostId(Integer postId) {
+	public List<CommentDTO> getCommentsByPostId(Integer postId, int page, int pageSize) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<CommentDTO> getCommentsByResponseId(Integer resId) {
+	public List<CommentDTO> getCommentsByResponseId(Integer resId, int pageNumber, int pageSize) {
 		// TODO Auto-generated method stub
 		return null;
 	}
- 
+
+
+	
+//	@Override
+//	public List<CommentDTO> getCommentsByPostId(Integer postId, int page, int pageSize) {
+//	    // Assuming commentDao supports pagination, you may need to check its documentation
+//	    Page<Comment> commentPage = commentDao.getCommentsByPostId(postId, PageRequest.of(page, pageSize));
+//	 
+//	    List<CommentDTO> commentDTO = commentPage.getContent().stream()
+//	            .map(entity -> modelMapper.map(entity, CommentDTO.class))
+//	            .collect(Collectors.toList());
+//	 
+//	    return commentDTO;
+//	}
+//	@Override
+//	public List<CommentDTO> getCommentsByResponseId(Integer resId, int pageNumber, int pageSize) {
+//	    Pageable pageable = PageRequest.of(pageNumber, pageSize); // You can change the sorting criteria as per your requirements
+//
+//	    Page<Comment> commentPage = commentDao.getCommentsByResponseId(resId, pageable);
+//
+//	    List<CommentDTO> commentDTOs = commentPage.getContent()
+//	            .stream()
+//	            .map(entity -> modelMapper.map(entity, CommentDTO.class))
+//	            .collect(Collectors.toList());
+//
+//	   
+//
+//	    return commentDTOs;
+//	}
+
     
 }

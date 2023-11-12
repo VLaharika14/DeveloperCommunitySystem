@@ -16,4 +16,5 @@ public class VoteDTO {
 	private Integer voteId;
 	private VoteType voteType;
 	private DeveloperDTO developerWhoVoted;
+	
 }

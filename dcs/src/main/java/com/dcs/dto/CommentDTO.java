@@ -18,13 +18,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommentDTO {
-	@NotNull
+	//@NotNull
 	private Integer commentId;
-	@Min(10)
-	@Max(20)
+	//@Min(10)
+	//@Max(20)
 	private String text;
 	private DeveloperDTO createdBy;
-	@CreatedDate
+	//@CreatedDate
 	private LocalDate createdDate;
 	private VoteDTO vote;
 }

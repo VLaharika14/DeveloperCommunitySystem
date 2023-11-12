@@ -38,8 +38,8 @@ public ResponseEntity<List<DeveloperDTO>> getAllDevelopers(){
 	return new ResponseEntity<List<DeveloperDTO>>(developer,HttpStatus.OK);
 }
 	
-@GetMapping(path="get/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-public ResponseEntity<DeveloperDTO> getDevelopers(@PathVariable int devId)throws DeveloperCommunitySystemException{
+@GetMapping(path="get/{devId}",produces = MediaType.APPLICATION_JSON_VALUE)
+public ResponseEntity<DeveloperDTO> getDevelopers(@PathVariable Integer devId)throws DeveloperCommunitySystemException{
 	if((Integer)devId==null) {
 		throw new DeveloperCommunitySystemException("Invalid Developer ID");
 	}
@@ -48,7 +48,7 @@ public ResponseEntity<DeveloperDTO> getDevelopers(@PathVariable int devId)throws
 }
 	
 
-@PostMapping(path="get/",consumes=MediaType.APPLICATION_JSON_VALUE)
+@PostMapping(path="add/",consumes=MediaType.APPLICATION_JSON_VALUE)
 public ResponseEntity<DeveloperDTO> saveDeveloper(@RequestBody DeveloperDTO developer)throws DeveloperCommunitySystemException{
 	DeveloperDTO newDeveloper=developerService.addDeveloper(developer);
 	if(newDeveloper==null) {
@@ -56,18 +56,11 @@ public ResponseEntity<DeveloperDTO> saveDeveloper(@RequestBody DeveloperDTO deve
 	}
 	return new ResponseEntity<DeveloperDTO>(newDeveloper,HttpStatus.OK);
 }
-@PutMapping(path="/update/{id}",consumes=MediaType.APPLICATION_JSON_VALUE)
-public ResponseEntity<DeveloperDTO> editDeveloper(DeveloperDTO developer,int id)throws DeveloperCommunitySystemException{
-	if((Integer)id==null) {
-		throw new DeveloperCommunitySystemException("Invalid Developer ID");
-	}
-	DeveloperDTO updateDeveloper=developerService.updateDeveloper(developer);
-	return new ResponseEntity<DeveloperDTO>(updateDeveloper,HttpStatus.OK);
-}
+
 
 //==========================================
-@GetMapping(path="get1/{devID}",produces=MediaType.APPLICATION_JSON_VALUE)
-public ResponseEntity<List<PostDTO>> getAllPostsByDeveloper(@PathVariable int devId)throws DeveloperCommunitySystemException{
+@GetMapping(path="get1/{devId}",produces=MediaType.APPLICATION_JSON_VALUE)
+public ResponseEntity<List<PostDTO>> getAllPostsByDeveloper(@PathVariable Integer devId)throws DeveloperCommunitySystemException{
 	if((Integer)devId==null) {
 		throw new DeveloperCommunitySystemException("Invalid Developer ID");
 	}
@@ -75,12 +68,7 @@ public ResponseEntity<List<PostDTO>> getAllPostsByDeveloper(@PathVariable int de
 	return new ResponseEntity<List<PostDTO>>(developer5,HttpStatus.OK);
 	
 }
-@GetMapping(path="get2/{status}",produces=MediaType.APPLICATION_JSON_VALUE)
-public ResponseEntity<List<DeveloperDTO>> getDevelopersByStatus(@PathVariable String status){
-	List<DeveloperDTO> developer6=developerService.getDeveloperByStatus(status);
-	return new ResponseEntity<List<DeveloperDTO>>(developer6,HttpStatus.OK);
-	
-}
+
 @GetMapping(path="get3/{reputation}",produces=MediaType.APPLICATION_JSON_VALUE)
 public ResponseEntity<List<DeveloperDTO>> getDevelopersByReputation(@PathVariable Integer reputation){
 	List<DeveloperDTO>developer7=developerService.getDeveloperByReputation(reputation);
@@ -108,19 +96,18 @@ public ResponseEntity<Page<DeveloperDTO>> getAllDevelopers(Pageable pageable) {
     Page<DeveloperDTO> entities = developerService.getAllDevelopers(pageable);
     return new ResponseEntity<Page<DeveloperDTO>>(entities, HttpStatus.OK);
 	}
-@GetMapping("/all1")
-public ResponseEntity<Page<PostDTO>> getAllPosts(Pageable pageable,@PathVariable int devId) {
+@GetMapping("/alld")
+public ResponseEntity<Page<PostDTO>> getAllPosts(Pageable pageable,@PathVariable Integer devId) {
 	
     Page<PostDTO> entities = developerService.getPostsByDeveloper(devId,pageable);
     return new ResponseEntity<>(entities, HttpStatus.OK);
 	}
-@GetMapping(path = "get2/{status}", produces = MediaType.APPLICATION_JSON_VALUE)
+@GetMapping(path = "get22/{status}", produces = MediaType.APPLICATION_JSON_VALUE)
 public ResponseEntity<Page<DeveloperDTO>> getDevelopersByStatus(
-    @PathVariable String status,
-    @RequestParam(name = "page", defaultValue = "0") int page,
-    @RequestParam(name = "size", defaultValue = "10") int size
+    @PathVariable String status,Pageable pageable
+   
 ) {
-    Page<DeveloperDTO> developerPage = developerService.getDevelopersByStatus(status, PageRequest.of(page, size));
+    Page<DeveloperDTO> developerPage = developerService.getDevelopersByStatus(status, pageable);
     return ResponseEntity.ok(developerPage);
 }
 	

@@ -2,6 +2,7 @@ package com.dcs.service;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -20,10 +21,18 @@ public interface IPostService {
 
 	PostDTO removePost(Integer postId);
 
-	List<PostDTO> getPostsByKeyword(String keyword);
+	
 
 	List<PostDTO> getPostsByTopic(String topic);
 
-	List<PostDTO> getPostsByDate(LocalDate date);
+	//List<PostDTO> getPostsByDate(LocalDate date);
+
+	
+
+	List<PostDTO> getPostsByTopic(String topic, int page, int pageSize);
+
+	//List<PostDTO> getPostsByDate(LocalDateTime localDateTime, int page, int pageSize);
+
+	//List<PostDTO> getPostsByDate(LocalDateTime date);
 
 }

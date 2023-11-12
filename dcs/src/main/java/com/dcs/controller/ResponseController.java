@@ -1,7 +1,10 @@
 package com.dcs.controller;
 	import java.util.List;
 	import org.springframework.beans.factory.annotation.Autowired;
-	import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 	import org.springframework.http.MediaType;
 	import org.springframework.http.ResponseEntity;
 	import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,10 +14,14 @@ package com.dcs.controller;
 	import org.springframework.web.bind.annotation.PutMapping;
 	import org.springframework.web.bind.annotation.RequestBody;
 	import org.springframework.web.bind.annotation.RequestMapping;
-	import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 	 
 	import com.dcs.dto.ResponseDTO;
-	import com.dcs.service.IResponseService;
+import com.dcs.entity.Developer;
+import com.dcs.entity.Post;
+import com.dcs.entity.Response;
+import com.dcs.service.IResponseService;
 	 
 
 	@RestController
@@ -44,22 +51,35 @@ package com.dcs.controller;
 		return new ResponseEntity<String>("Response deleted",HttpStatus.OK);
 	}
 	 
-	@GetMapping(path="/post/{postId}",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<ResponseDTO >> getResponseByPost(@PathVariable Integer postId){
-		List<ResponseDTO> response=responseService.getResponseByPost(postId);
-	return new ResponseEntity<List<ResponseDTO>>(response,HttpStatus.OK);
-	}
-	 
+//
+//	 
 	@GetMapping(path="/votes/{voteType}/{resId}",produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Integer> getNoOfVotesOnResponseByVoteType(String  voteType, Integer resId){
 		Integer value=responseService.getNoOfVotesOnResponseByVoteType(voteType,resId);
 		return new ResponseEntity<Integer>(value,HttpStatus.OK);
 	}
-	 
-	@GetMapping(path="/developer/{devId}",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<ResponseDTO >> getResponseByDeveloper(Integer devId){
-		List<ResponseDTO> value1=responseService.getResponseByDeveloper(devId);
-		return new ResponseEntity<List<ResponseDTO >>(value1,HttpStatus.OK);
-	}
-	}
-
+//	@GetMapping("/{postId}")
+//	public ResponseEntity<Page<ResponseDTO>> getResponsesByPost(@PathVariable(value = "postId") 
+//	Integer postId,@RequestParam(value = "page", defaultValue = "0")Integer page,
+//	@RequestParam(value = "size", defaultValue = "5") Integer size){
+//		Pageable pageable = PageRequest.of(page, size);
+//		Post post = new Post();
+//		post.setPostId(postId);
+//		Page<ResponseDTO> responsePage = responseService.getResponsesByPost(post, pageable);
+//		return new ResponseEntity<>(responsePage, HttpStatus.OK);
+//	}
+//	
+//	@GetMapping(path = "/developer/{devId}", produces = MediaType.APPLICATION_JSON_VALUE)
+//		public ResponseEntity<List<ResponseDTO>> getResponseByDeveloper(
+//		    @RequestParam(defaultValue = "0") Integer page,
+//		    @RequestParam(defaultValue = "10") Integer size,
+//		    @PathVariable Integer devId
+//		) {
+//	Developer developer=new Developer();
+//	developer.setUserId(devId);
+//		    Pageable pageable = PageRequest.of(page, size);
+//		    Page<ResponseDTO> responsePage = responseService.getResponseByDeveloper(developer, pageable);
+//	 
+//		    return new ResponseEntity<>(responsePage.getContent(), HttpStatus.OK);
+//		}
+}

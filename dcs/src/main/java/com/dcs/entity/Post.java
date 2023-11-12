@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class Post {
 	private Developer developer;
 	@OneToMany(mappedBy="post",cascade=CascadeType.ALL) // Many posts are associated with one developer
 	private List<Response> listOfResponse;
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // Many posts are associated with one developer
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE},fetch = FetchType.EAGER) // Many posts are associated with one developer
     @JoinColumn(name = "comment")
 	private List<Comment> listOfComment;
 	private Integer noOfViews;

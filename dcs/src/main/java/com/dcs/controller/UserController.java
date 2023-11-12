@@ -22,7 +22,7 @@ import com.dcs.service.IUserService;
 public class UserController {
 @Autowired
 IUserService userService;
-@PostMapping(path="get/",consumes=MediaType.APPLICATION_JSON_VALUE)
+@PostMapping(path="register/",consumes=MediaType.APPLICATION_JSON_VALUE)
 public ResponseEntity<UserDTO> registerUser(@RequestBody UserDTO user){
 	UserDTO newUser=userService. registerUser(user);
 	return new ResponseEntity<UserDTO>(newUser,HttpStatus.OK);

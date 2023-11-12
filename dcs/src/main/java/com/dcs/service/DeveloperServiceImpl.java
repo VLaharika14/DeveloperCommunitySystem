@@ -35,16 +35,7 @@ public class DeveloperServiceImpl implements IDeveloperService {
 		
 	}
 
-	@Override
-	public DeveloperDTO updateDeveloper(DeveloperDTO developer) {
-		Developer entity2=modelMapper.map(developer, Developer.class);
-		Developer existingDeveloper = developerDao.findById(entity2.getUserId()).get();
-		if (existingDeveloper != null) {
-			existingDeveloper.setUserName(entity2.getUserName());
-			 return modelMapper.map(existingDeveloper, DeveloperDTO.class);
-		}
-		return null; 
-	}
+	
 
 //	@Override
 //	public List<DeveloperDTO> getDeveloperByStatus(String status) {	
@@ -163,8 +154,8 @@ public class DeveloperServiceImpl implements IDeveloperService {
 	    return new PageImpl<>(developerDTOs, developersPage.getPageable(), developersPage.getTotalElements()); }
 
 		@Override
-		public Page<DeveloperDTO>getDevelopersByStatus(String status, PageRequest of) {
-			Page<Developer> developersPage = developerDao.findByStatus(status, of);
+		public Page<DeveloperDTO>getDevelopersByStatus(String status, Pageable pageable) {
+			Page<Developer> developersPage = developerDao.findByStatus(status, pageable);
 			List<DeveloperDTO> developerDTOs = developersPage.getContent().stream().map(entity -> modelMapper.map(entity, DeveloperDTO.class)).collect(Collectors.toList());     
 		    return new PageImpl<>(developerDTOs, developersPage.getPageable(), developersPage.getTotalElements());
 			

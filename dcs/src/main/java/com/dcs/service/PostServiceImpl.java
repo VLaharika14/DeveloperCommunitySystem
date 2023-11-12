@@ -1,11 +1,15 @@
 package com.dcs.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.dcs.dao.PostDao;
@@ -66,52 +70,56 @@ public class PostServiceImpl implements IPostService {
         return modelMapper.map(post,PostDTO.class);
 	}
 
-//	@Override
-//	public List<PostDTO> getPostsByKeyword(String keyword) {
-//		List<Post> matchingPosts = postDao.findPostsByKeyword(keyword);      
-//		List<PostDTO>postDTO= matchingPosts.stream().map(entity -> modelMapper.map(entity, PostDTO.class)).collect(Collectors.toList());
-//		return postDTO;
-//		
-//	}
-
-//	@Override
-//	public List<PostDTO> getPostsByTopic(String topic) {
-//		List<Post> matchingPosts = postDao.findPostsByKeyword(topic); 
-//		List<PostDTO>commentDTO= matchingPosts.stream().map(entity -> modelMapper.map(entity, PostDTO.class)).collect(Collectors.toList());
-//		return commentDTO;
-//		
-//	}
-
-//	@Override
-//	public List<PostDTO> getPostsByDate(LocalDate date) {
-//		List<Post> matchingPosts = postDao.findPostsByDate(date); 
-//		List<PostDTO>postDTO= matchingPosts.stream().map(entity -> modelMapper.map(entity, PostDTO.class)).collect(Collectors.toList());
-//		return postDTO;
-//		
-//	}
 
 	@Override
 	public Integer getNoOfVotesOnPostByVoteType(String voteType, Integer postId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public List<PostDTO> getPostsByKeyword(String keyword) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public List<PostDTO> getPostsByTopic(String topic) {
-		// TODO Auto-generated method stub
-		return null;
+	    List<Post> matchingPosts = postDao.findPostsByTopic(topic);
+ 
+	    List<PostDTO> postDTO = matchingPosts.stream()
+	            .map(entity -> modelMapper.map(entity, PostDTO.class))
+	            .collect(Collectors.toList());
+ 
+	    return postDTO;
 	}
+//	@Override
+//		public List<PostDTO> getPostsByDate(LocalDateTime date) {
+//		    List<Post> matchingPosts = postDao.findPostsByDate(date);
+//	 
+//		    List<PostDTO> postDTO = matchingPosts.stream()
+//		            .map(entity -> modelMapper.map(entity, PostDTO.class))
+//		            .collect(Collectors.toList());
+//	 
+//		    return postDTO;
+//		}
 
-	@Override
-	public List<PostDTO> getPostsByDate(LocalDate date) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	
+	 @Override
+	    public List<PostDTO> getPostsByTopic(String topic, int page, int pageSize) {
+	        Pageable pageable = PageRequest.of(page, pageSize);
+	        Page<Post> postPage = postDao.getPostsByTopic(topic, pageable);
 
+	        return postPage.getContent()
+	                .stream()
+	                .map(post -> modelMapper.map(post, PostDTO.class))
+	                .collect(Collectors.toList());
+	    }
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
 }

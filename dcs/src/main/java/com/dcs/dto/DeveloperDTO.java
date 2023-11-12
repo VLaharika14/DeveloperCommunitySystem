@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DeveloperDTO extends UserDTO {
-	@NotNull
+	//@NotNull
 	private String devName;
 	private String devSkill;
 	private LocalDate memberSince;
@@ -23,5 +23,6 @@ public class DeveloperDTO extends UserDTO {
 	// Block or Unblock
 	private String status;
 	private List<PostDTO> listOfPosts;
+	
 
 }

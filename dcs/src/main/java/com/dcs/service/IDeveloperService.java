@@ -16,7 +16,7 @@ public interface IDeveloperService {
 
 	DeveloperDTO addDeveloper(DeveloperDTO developer);
 
-	DeveloperDTO updateDeveloper(DeveloperDTO developer);
+	
 
 	List<DeveloperDTO> getDeveloperByStatus(String status);
 
@@ -37,7 +37,7 @@ public interface IDeveloperService {
 
 	Page<DeveloperDTO> getAllDevelopers(Pageable pageable);
 
-	Page<DeveloperDTO> getDevelopersByStatus(String status, PageRequest of);
+	Page<DeveloperDTO> getDevelopersByStatus(String status, Pageable pageable);
 
 //	Page<DeveloperDTO> getAllDevelopers(Pageable pageable);
 

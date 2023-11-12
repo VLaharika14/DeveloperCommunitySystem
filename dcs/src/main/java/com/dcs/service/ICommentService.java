@@ -19,7 +19,11 @@ public interface ICommentService {
 
 	CommentDTO  getByCommentId(Integer commentId);
 
-	List<CommentDTO > getCommentsByPostId(Integer postId);
+	//List<CommentDTO > getCommentsByPostId(Integer postId);
 
-	List<CommentDTO > getCommentsByResponseId(Integer resId);
+	//List<CommentDTO > getCommentsByResponseId(Integer resId);
+
+	List<CommentDTO> getCommentsByPostId(Integer postId, int page, int pageSize);
+
+	List<CommentDTO> getCommentsByResponseId(Integer resId, int pageNumber, int pageSize);
 }

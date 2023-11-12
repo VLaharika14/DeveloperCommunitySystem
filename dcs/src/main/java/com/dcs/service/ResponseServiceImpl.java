@@ -9,10 +9,15 @@ import javax.persistence.EntityNotFoundException;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.dcs.dao.ResponseDao;
 import com.dcs.dto.ResponseDTO;
+import com.dcs.entity.Developer;
+import com.dcs.entity.Post;
 import com.dcs.entity.Response;
 @Service
 public class ResponseServiceImpl implements IResponseService {
@@ -54,24 +59,7 @@ ResponseDao responseDao;
 
 	}
  
-//	@Override
-//
-//	public List<ResponseDTO> getResponseByPost(Integer postId) {
-//
-//		// TODO Auto-generated method stub
-//
-//		List<Response> responses = responseDao.findByDevId(postId);
-//
-//		List<Response> responseEntity = new ArrayList<>();
-//
-//        for (Response response : responses) {
-//
-//            responseEntity.add(response);
-//
-//	}
-//        List<ResponseDTO>responseDTO= responseEntity.stream().map(entity -> modelMapper.map(entity, ResponseDTO.class)).collect(Collectors.toList());
-//return responseDTO;
-//	}
+	
 
 	@Override
 	public Integer getNoOfVotesOnResponseByVoteType(String voteType, Integer resId) {
@@ -79,17 +67,12 @@ ResponseDao responseDao;
 		return null;
 	}
 
-	@Override
-	public List<ResponseDTO> getResponseByDeveloper(Integer devId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ResponseDTO> getResponseByPost(Integer postId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public Page<ResponseDTO> getResponseByDeveloper(Developer developer, Integer page, Integer size) {
+//	    Pageable pageable1 = PageRequest.of(page, size);
+//	    Page<Response> responsePage = responseDao.findByDevId(developer, pageable1);
+//	    return responsePage.map(entity -> modelMapper.map(entity, ResponseDTO.class));
+//	}
 	
  
 //	@Override
@@ -100,16 +83,30 @@ ResponseDao responseDao;
 //		return number;
 //
 //	}
- 
 //	@Override
-//
-//	public List<ResponseDTO> getResponseByDeveloper(Integer devId) {
-//
-//		List<Response> entity1=responseDao.findByDevId(devId);
-//		List<ResponseDTO>responseDTO= entity1.stream().map(entity -> modelMapper.map(entity, ResponseDTO.class)).collect(Collectors.toList());
-//		return responseDTO;
-//
+//	public Page<ResponseDTO> getResponseByPost(Post post, Integer page, Integer size) {
+//	    Pageable pageable = PageRequest.of(page, size);
+//	    Page<Response> responsePage = responseDao.findByPostId(post, pageable);
+//	    return responsePage.map(entity -> modelMapper.map(entity, ResponseDTO.class));
 //	}
+////	
+
+//	@Override
+//	public Page<ResponseDTO> getResponseByDeveloper(Developer developer, Pageable pageable) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+	
+
+	
+	
+
+	
+
+
+
+	
  
 	
 
