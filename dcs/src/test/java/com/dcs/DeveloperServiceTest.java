@@ -101,7 +101,7 @@ public class DeveloperServiceTest {
 			
 			Mockito.when(developerDao.findAll()).thenReturn(ld);
 			
-			assertThat(developerService.getAllDevelopers().equals(ld));
+			assertThat(developerService.getAllDevelopers(12, 1).equals(ld));
 			
 		}
 		@Test
@@ -273,7 +273,7 @@ public class DeveloperServiceTest {
 			DeveloperDTO dt= modelMapper.map(d1, DeveloperDTO.class);
 
 	  
-			assertThat(developerService.updateDeveloper(dt)).isEqualTo(dt);
+			assertThat(developerService.addDeveloper(dt)).isEqualTo(dt);
 			
 		}
 		@Test

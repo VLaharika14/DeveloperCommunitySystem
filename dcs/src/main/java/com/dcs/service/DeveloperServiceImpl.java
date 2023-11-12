@@ -58,12 +58,12 @@ public class DeveloperServiceImpl implements IDeveloperService {
 //		return developerDTOs;
 //	}
 
-	@Override
-	public List<DeveloperDTO> getAllDevelopers() {
-		List<Developer>entity5= developerDao.findAll();
-		List<DeveloperDTO> developerDTOs = entity5.stream().map(entity -> modelMapper.map(entity, DeveloperDTO.class)).collect(Collectors.toList());
-	return developerDTOs;
-	}
+//	@Override
+//	public List<DeveloperDTO> getAllDevelopers() {
+//		List<Developer>entity5= developerDao.findAll();
+//		List<DeveloperDTO> developerDTOs = entity5.stream().map(entity -> modelMapper.map(entity, DeveloperDTO.class)).collect(Collectors.toList());
+//	return developerDTOs;
+//	}
 
 	@Override
 	public List<PostDTO> getPostsByDeveloper(Integer devId) {
@@ -148,7 +148,8 @@ public class DeveloperServiceImpl implements IDeveloperService {
 	    } 
 	    }
 	    @Override
-	    public Page<DeveloperDTO> getAllDevelopers(Pageable pageable) {     
+	    public Page<DeveloperDTO> getAllDevelopers(int page,int pageSize) {    
+	    	Pageable pageable = PageRequest.of(page, pageSize);
 	    	Page<Developer> developersPage = developerDao.findAll(pageable);     
 	    	List<DeveloperDTO> developerDTOs = developersPage.getContent().stream().map(entity -> modelMapper.map(entity, DeveloperDTO.class)).collect(Collectors.toList());     
 	    return new PageImpl<>(developerDTOs, developersPage.getPageable(), developersPage.getTotalElements()); }
@@ -159,7 +160,7 @@ public class DeveloperServiceImpl implements IDeveloperService {
 			List<DeveloperDTO> developerDTOs = developersPage.getContent().stream().map(entity -> modelMapper.map(entity, DeveloperDTO.class)).collect(Collectors.toList());     
 		    return new PageImpl<>(developerDTOs, developersPage.getPageable(), developersPage.getTotalElements());
 			
-		}
+		}	
 
 		
 	}

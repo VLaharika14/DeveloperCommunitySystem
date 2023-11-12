@@ -30,13 +30,13 @@ import com.dcs.service.IDeveloperService;
 public class DeveloperController {
 @Autowired
 IDeveloperService developerService;
-@GetMapping(path="/getall",produces = MediaType.APPLICATION_JSON_VALUE)
-public ResponseEntity<List<DeveloperDTO>> getAllDevelopers(){
-	
-	List<DeveloperDTO> developer=developerService.getAllDevelopers();
-	
-	return new ResponseEntity<List<DeveloperDTO>>(developer,HttpStatus.OK);
-}
+//@GetMapping(path="/getall",produces = MediaType.APPLICATION_JSON_VALUE)
+//public ResponseEntity<List<DeveloperDTO>> getAllDevelopers(){
+//	
+//	List<DeveloperDTO> developer=developerService.getAllDevelopers();
+//	
+//	return new ResponseEntity<List<DeveloperDTO>>(developer,HttpStatus.OK);
+//}
 	
 @GetMapping(path="get/{devId}",produces = MediaType.APPLICATION_JSON_VALUE)
 public ResponseEntity<DeveloperDTO> getDevelopers(@PathVariable Integer devId)throws DeveloperCommunitySystemException{
@@ -90,13 +90,14 @@ public ResponseEntity<List<DeveloperDTO>> getByNoOfPosts(@PathVariable Integer n
 //    Page<Developer> result = developerService.findAllWithPagination(page, size);
 //    return ResponseEntity.ok(result);
 //}
-@GetMapping("/all")
-public ResponseEntity<Page<DeveloperDTO>> getAllDevelopers(Pageable pageable) {
+@GetMapping("get/all")
+public ResponseEntity<Page<DeveloperDTO>> getAllDevelopers(@RequestParam(name = "page", defaultValue = "0") int page,
+	    @RequestParam(name = "size", defaultValue = "10") int size) {
 	
-    Page<DeveloperDTO> entities = developerService.getAllDevelopers(pageable);
+    Page<DeveloperDTO> entities = developerService.getAllDevelopers(page,size);
     return new ResponseEntity<Page<DeveloperDTO>>(entities, HttpStatus.OK);
 	}
-@GetMapping("/alld")
+@GetMapping("get/alld")
 public ResponseEntity<Page<PostDTO>> getAllPosts(Pageable pageable,@PathVariable Integer devId) {
 	
     Page<PostDTO> entities = developerService.getPostsByDeveloper(devId,pageable);

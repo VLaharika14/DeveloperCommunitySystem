@@ -24,7 +24,7 @@ public interface IDeveloperService {
 
 	List<DeveloperDTO> getDeveloperByReputation(Integer reputation);
 
-	List<DeveloperDTO> getAllDevelopers();
+	Page<DeveloperDTO> getAllDevelopers(int page, int size);
 
 	List<PostDTO> getPostsByDeveloper(Integer devId);
 
@@ -35,7 +35,7 @@ public interface IDeveloperService {
 
 	Page<PostDTO> getPostsByDeveloper(Integer devId, Pageable pageable);
 
-	Page<DeveloperDTO> getAllDevelopers(Pageable pageable);
+	//Page<DeveloperDTO> getAllDevelopers(Pageable pageable);
 
 	Page<DeveloperDTO> getDevelopersByStatus(String status, Pageable pageable);
 
